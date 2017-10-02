@@ -19,12 +19,12 @@ namespace LabNumber5
                 int NumOfSides; //Declare Variables 
                 string input;
 
-                Console.WriteLine("Welcome to the Grand Circus Casino! Roll the dice? (N/No/y/Y/Yes)"); //Ask for user input
-                input = Console.ReadLine(); 
+                Console.WriteLine("Welcome to the Grand Circus Casino! Roll the dice? (n/y)"); //Ask for user input
+                input = ValidateString();
 
-                if (input == "N" || input == "No" || input == "no") 
+                if (input == "no")
                 {
-                    ProgramContinue = false; //End program if user selects No/N/no
+                    ProgramContinue = false; //End program if user selects "no"
                 }
                 else
                 {
@@ -33,6 +33,7 @@ namespace LabNumber5
                     Console.WriteLine("Roll 1:");
                     Console.WriteLine(RndNum(1, NumOfSides)); //output
                     Console.WriteLine(RndNum(1, NumOfSides));
+                    
                 }
 
             }
@@ -41,11 +42,29 @@ namespace LabNumber5
         public static int RndNum(int min, int max)
         {
 
-            Random rnd = new Random(); //creates random numbers
+            Random rnd = new Random(Guid.NewGuid().GetHashCode()); //creates random numbers (added randome seed code
 
             int result = rnd.Next(min, max + 1); //range is min and max, always add extra "1"
             return result;
 
+        }
+
+        public static string ValidateString()
+        {
+
+            bool Validate = true;
+            string UserInput = "";
+            while (Validate == true)
+            {
+                UserInput = (Console.ReadLine());
+                if (UserInput != "yes" && UserInput != "no")
+                {
+                    Console.WriteLine("Please enter yes or no!");
+                }
+                else
+                    Validate = false;
+            }
+            return UserInput;
         }
 
 
